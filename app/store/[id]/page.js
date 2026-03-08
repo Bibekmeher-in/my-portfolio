@@ -5,7 +5,6 @@ import axios from 'axios'
 import { motion } from 'framer-motion'
 import { HiShoppingCart, HiCheck } from 'react-icons/hi'
 import { formatCurrency } from '@/lib/currency'
-import { isAuthenticated, getUserData } from '@/lib/auth'
 
 export default function ProductDetail() {
     const params = useParams()
@@ -38,17 +37,9 @@ export default function ProductDetail() {
     }
 
     const handlePurchase = async () => {
-        if (!isAuthenticated()) {
-            alert('Please login to purchase')
-            router.push('/login')
-            return
-        }
-
         setLoading(true)
 
         try {
-            const user = getUserData()
-
             // Create order on backend
             const orderRes = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/payment/create-order`, {
                 amount: product.price,
@@ -78,14 +69,12 @@ export default function ProductDetail() {
                                 productId: product._id,
                                 productTitle: product.title,
                                 amount: amount,
-                                userEmail: user.email,
-                                userName: user.name,
                             }
                         )
 
                         if (verifyRes.data.success) {
-                            alert('Payment successful! Check your email for download link.')
-                            router.push('/profile')
+                            alert('Payment successful! Thank you for your purchase.')
+                            router.push('/store')
                         }
                     } catch (error) {
                         console.error('Payment verification failed:', error)
@@ -93,8 +82,8 @@ export default function ProductDetail() {
                     }
                 },
                 prefill: {
-                    name: user.name,
-                    email: user.email,
+                    name: 'Customer',
+                    email: '',
                 },
                 method: {
                     upi: true,

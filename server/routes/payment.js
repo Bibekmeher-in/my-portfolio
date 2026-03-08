@@ -16,6 +16,12 @@ router.post('/create-order', async (req, res) => {
     try {
         const { amount, productId, productTitle } = req.body
 
+        if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+            return res.status(500).json({
+                error: 'Razorpay keys not configured. Please set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in environment variables.'
+            })
+        }
+
         // Create Razorpay order
         const options = {
             amount: amount * 100, // amount in paise (₹1 = 100 paise)
@@ -52,8 +58,6 @@ router.post('/verify-payment', async (req, res) => {
             productId,
             productTitle,
             amount,
-            userEmail,
-            userName,
         } = req.body
 
         // Verify signature
@@ -71,8 +75,8 @@ router.post('/verify-payment', async (req, res) => {
                 productId,
                 productTitle,
                 amount: amount / 100, // Convert back to rupees
-                userEmail,
-                userName,
+                userEmail: 'customer@example.com',
+                userName: 'Customer',
                 status: 'completed',
                 paymentMethod: 'razorpay',
             })
