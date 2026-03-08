@@ -69,7 +69,7 @@ export default function AboutPage() {
                     >
                         <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-primary">My Story</h3>
                         <p className="text-gray-300 mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
-                            Bibek is a passionate developer and AI builder focused on creating modern digital solutions.
+                            Bibek is a passionate developer and AI automation focused on creating modern digital solutions.
                             He specializes in web development, automation systems, AI chatbots, and scalable applications.
                         </p>
                         <p className="text-gray-300 mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
