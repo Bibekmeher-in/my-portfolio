@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    @apply text-white;
+    background: radial-gradient(ellipse at top, #1A1A1D 0%, #0D0D0F 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body.light {
+    @apply text-gray-900;
+    background: radial-gradient(ellipse at top, #FFE5D9 0%, #ffffff 100%);
+}
+
+body.light .glass {
+    @apply bg-white/80 border-primary/30;
+    box-shadow: 0 8px 32px 0 rgba(255, 107, 53, 0.1);
+}
+
+body.light .text-white {
+    @apply text-gray-900;
+}
+
+body.light .text-gray-300 {
+    @apply text-gray-700;
+}
+
+body.light .text-gray-400 {
+    @apply text-gray-600;
+}
+
+.glass {
+    @apply bg-gradient-to-br from-chili-dark/40 to-chili-red/10 backdrop-blur-xl border border-primary/30;
+    box-shadow: 0 8px 32px 0 rgba(255, 107, 53, 0.2);
+    transform-style: preserve-3d;
+}
+
+.glass:hover {
+    box-shadow: 0 12px 48px 0 rgba(255, 107, 53, 0.4);
+    border-color: rgba(255, 107, 53, 0.6);
+}
+
+.gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+}
+
+.btn-primary {
+    @apply px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-semibold relative overflow-hidden text-sm sm:text-base;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transform: translateZ(20px);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateZ(30px) scale(1.05);
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.8);
+}
+
+.btn-secondary {
+    @apply px-4 py-2 sm:px-6 sm:py-3 glass rounded-lg font-semibold text-sm sm:text-base;
+    transform: translateZ(10px);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    transform: translateZ(20px) scale(1.05);
+}
+
+.section-padding {
+    @apply py-12 px-4 sm:py-16 md:py-20 sm:px-6 md:px-8 lg:px-16;
+}
+
+.container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6;
+}
+
+.card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+@media (hover: hover) {
+    .card-3d:hover {
+        transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+    }
+}
+
+.horror-glow {
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3),
+        0 0 60px rgba(247, 147, 30, 0.2),
+        inset 0 0 20px rgba(255, 107, 53, 0.1);
+}
+
+.text-shadow-horror {
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.8),
+        0 0 20px rgba(247, 147, 30, 0.6),
+        0 0 30px rgba(253, 200, 48, 0.4);
+}
+
+.skeleton {
+    @apply animate-pulse bg-gradient-to-r from-chili-dark/50 to-chili-red/20;
+    border-radius: 0.5rem;
+}
+
+.skeleton-text {
+    @apply h-4 skeleton mb-2;
+}
+
+.skeleton-title {
+    @apply h-8 skeleton mb-4;
+}
+
+.skeleton-card {
+    @apply glass p-6 rounded-lg;
+}
+
+/* Mobile responsive utilities */
+@media (max-width: 640px) {
+    .text-shadow-horror {
+        text-shadow: 0 0 5px rgba(255, 107, 53, 0.8),
+            0 0 10px rgba(247, 147, 30, 0.6);
+    }
+
+    .horror-glow {
+        box-shadow: 0 0 15px rgba(255, 107, 53, 0.3),
+            0 0 30px rgba(247, 147, 30, 0.2);
+    }
+}
+
+/* Prevent horizontal scroll on mobile */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Touch-friendly spacing */
+@media (max-width: 768px) {
+
+    button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Improve form inputs on mobile */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+
+    /* Better spacing for mobile forms */
+    form {
+        @apply space-y-3;
+    }
+
+    /* Responsive text sizes */
+    h1 {
+        @apply text-2xl sm:text-3xl;
+    }
+
+    h2 {
+        @apply text-xl sm:text-2xl;
+    }
+
+    h3 {
+        @apply text-lg sm:text-xl;
+    }
+
+    /* Better padding on mobile */
+    .section-padding {
+        @apply py-8 px-3 sm:py-12 sm:px-4 md:py-16 md:px-6 lg:py-20 lg:px-8;
+    }
+
+    .container-custom {
+        @apply max-w-7xl mx-auto px-3 sm:px-4;
+    }
+}
