@@ -4,7 +4,11 @@ import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 import ContactForm from './ContactForm'
 
-function ContactContent() {
+function ContactSkeleton() {
+    return <div className="h-96 glass rounded-lg animate-pulse" />
+}
+
+export default function ContactPage() {
     return (
         <div className="pt-24 section-padding">
             <div className="container-custom max-w-4xl">
@@ -16,7 +20,7 @@ function ContactContent() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                    <Suspense fallback={<div className="h-96 glass rounded-lg animate-pulse" />}>
+                    <Suspense fallback={<ContactSkeleton />}>
                         <ContactForm />
                     </Suspense>
 
@@ -62,8 +66,4 @@ function ContactContent() {
             </div>
         </div>
     )
-}
-
-export default function ContactPage() {
-    return <ContactContent />
 }
