@@ -65,7 +65,7 @@ export default function Navbar() {
                         ))}
                         <ThemeToggle />
 
-                        {user ? (
+                        {user && (
                             <div className="flex items-center gap-3">
                                 <Link href={user.role === 'admin' ? '/admin' : '/profile'} className="flex items-center gap-2 hover:text-primary">
                                     <HiUser /> {user.name}
@@ -73,15 +73,6 @@ export default function Navbar() {
                                 <button onClick={handleLogout} className="btn-secondary text-sm">
                                     Logout
                                 </button>
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-3">
-                                <Link href="/login" className="hover:text-primary">
-                                    Login
-                                </Link>
-                                <Link href="/signup" className="btn-primary text-sm">
-                                    Sign Up
-                                </Link>
                             </div>
                         )}
                     </div>
@@ -116,7 +107,7 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {user ? (
+                        {user && (
                             <>
                                 <Link
                                     href={user.role === 'admin' ? '/admin' : '/profile'}
@@ -134,23 +125,6 @@ export default function Navbar() {
                                 >
                                     Logout
                                 </button>
-                            </>
-                        ) : (
-                            <>
-                                <Link
-                                    href="/login"
-                                    className="block py-3 px-4 hover:text-primary hover:bg-primary/10 transition-all rounded"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    Login
-                                </Link>
-                                <Link
-                                    href="/signup"
-                                    className="block py-3 px-4 bg-primary/20 hover:bg-primary/30 transition-all rounded mx-4 mt-2 text-center"
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    Sign Up
-                                </Link>
                             </>
                         )}
                     </motion.div>
