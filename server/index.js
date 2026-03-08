@@ -6,8 +6,19 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
 const app = express()
 
-app.use(cors())
+// CORS configuration
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}))
+
 app.use(express.json())
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ status: 'Backend is running' })
+})
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/bibek-portfolio'
 
