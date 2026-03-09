@@ -494,29 +494,46 @@ select:focus {
     box-shadow: 0 0 0 2px var(--border-color) !important;
 }
 
-/* Razorpay Modal Fixes */
+/* Razorpay Modal Fixes - All Devices */
 .razorpay-container {
-    z-index: 99999 !important;
+    z-index: 2147483647 !important;
+    position: fixed !important;
 }
 
 .razorpay-backdrop {
-    z-index: 99998 !important;
-    background: rgba(0, 0, 0, 0.8) !important;
+    z-index: 2147483646 !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
 }
 
 .razorpay-checkout-frame {
-    z-index: 99999 !important;
+    z-index: 2147483647 !important;
     position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
 }
 
 /* Ensure Razorpay modal is visible above all elements */
 iframe[name^="razorpay"] {
-    z-index: 99999 !important;
+    z-index: 2147483647 !important;
+    position: fixed !important;
 }
 
 /* Fix for Razorpay overlay */
 body.razorpay-open {
     overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 /* Razorpay payment modal styling */
@@ -527,4 +544,64 @@ body.razorpay-open {
     padding: 12px 24px !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
+}
+
+/* Mobile specific fixes */
+@media (max-width: 768px) {
+    .razorpay-container {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+
+    .razorpay-checkout-frame {
+        width: 95vw !important;
+        max-width: 95vw !important;
+        max-height: 95vh !important;
+    }
+
+    iframe[name^="razorpay"] {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+    }
+}
+
+/* Tablet specific fixes */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .razorpay-checkout-frame {
+        width: 85vw !important;
+        max-width: 600px !important;
+        max-height: 85vh !important;
+    }
+}
+
+/* Desktop specific fixes */
+@media (min-width: 1025px) {
+    .razorpay-checkout-frame {
+        width: auto !important;
+        max-width: 500px !important;
+        max-height: 80vh !important;
+    }
+}
+
+/* Override any conflicting z-index from other elements */
+nav,
+.clay-navbar,
+header {
+    z-index: 50 !important;
+}
+
+/* Ensure modals appear above navbar */
+.modal,
+.overlay,
+[role="dialog"] {
+    z-index: 1000 !important;
+}
+
+/* Razorpay specific overrides */
+body.razorpay-open nav,
+body.razorpay-open .clay-navbar,
+body.razorpay-open header {
+    z-index: 50 !important;
 }
