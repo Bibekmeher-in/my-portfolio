@@ -31,10 +31,10 @@ export default function StorePage() {
     return (
         <div className="pt-24 section-padding">
             <div className="container-custom">
-                <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">
+                <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text-clay">
                     Digital Store
                 </h1>
-                <p className="text-center text-gray-400 mb-12">
+                <p className="text-center text-clay-text-muted mb-12">
                     Premium digital products to accelerate your development
                 </p>
 
@@ -44,7 +44,7 @@ export default function StorePage() {
                         placeholder="Search products..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full px-4 py-3 glass rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base"
+                        className="w-full clay-input px-4 py-3 rounded-2xl focus:outline-none text-sm sm:text-base"
                     />
 
                     <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
@@ -52,7 +52,9 @@ export default function StorePage() {
                             <button
                                 key={cat}
                                 onClick={() => setFilter(cat)}
-                                className={`px-3 sm:px-4 py-2 rounded-lg capitalize text-xs sm:text-sm ${filter === cat ? 'bg-primary' : 'glass hover:bg-white/10'
+                                className={`px-3 sm:px-4 py-2 rounded-xl capitalize text-xs sm:text-sm font-semibold transition-all depth-2 ${filter === cat
+                                        ? 'clay-btn'
+                                        : 'clay-card hover:depth-3'
                                     }`}
                             >
                                 {cat}
@@ -71,13 +73,13 @@ export default function StorePage() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="glass p-12 rounded-lg text-center"
+                                className="clay-card p-12 rounded-3xl text-center depth-2"
                             >
                                 <div className="text-6xl mb-4">🛍️</div>
-                                <h2 className="text-3xl font-bold mb-2 gradient-text">
+                                <h2 className="text-3xl font-bold mb-2 gradient-text-clay">
                                     Products Coming Soon
                                 </h2>
-                                <p className="text-gray-400">
+                                <p className="text-clay-text-muted">
                                     {search || filter !== 'all'
                                         ? 'No products match your search. Try different filters.'
                                         : 'We are working on amazing digital products for you. Stay tuned!'}

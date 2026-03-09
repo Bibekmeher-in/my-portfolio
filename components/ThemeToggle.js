@@ -1,29 +1,44 @@
 'use client'
 import { HiMoon, HiSun } from 'react-icons/hi'
+import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function ThemeToggle() {
-    const [theme, setTheme] = useState('dark')
+    const { theme, setTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') || 'dark'
-        setTheme(savedTheme)
-        document.body.classList.toggle('light', savedTheme === 'light')
+        setMounted(true)
     }, [])
 
-    const toggleTheme = () => {
-        const newTheme = theme === 'dark' ? 'light' : 'dark'
-        setTheme(newTheme)
-        localStorage.setItem('theme', newTheme)
-        document.body.classList.toggle('light', newTheme === 'light')
+    if (!mounted) {
+        return (
+            <button className="clay-btn p-2 sm:p-3 depth-2">
+                <HiSun size={20} />
+            </button>
+        )
     }
 
     return (
-        <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg glass hover:bg-primary/20 transition-all"
+        <motion.button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="clay-btn p-2 sm:p-3 depth-2 hover:depth-3"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Toggle theme"
         >
-            {theme === 'dark' ? <HiSun size={20} className="text-accent" /> : <HiMoon size={20} className="text-primary" />}
-        </button>
+            <motion.div
+                initial={false}
+                animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+            >
+                {theme === 'dark' ? (
+                    <HiSun size={20} className="text-clay-text" />
+                ) : (
+                    <HiMoon size={20} className="text-clay-text" />
+                )}
+            </motion.div>
+        </motion.button>
     )
 }

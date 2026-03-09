@@ -19,40 +19,61 @@ export default function Newsletter() {
     }
 
     return (
-        <section className="section-padding">
+        <section className="section-padding perspective-3d">
             <div className="container-custom">
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="glass p-6 sm:p-8 md:p-12 rounded-lg text-center"
+                    className="clay-card p-6 sm:p-8 md:p-12 rounded-3xl text-center depth-3 hover:depth-4"
+                    style={{ transformStyle: 'preserve-3d' }}
                 >
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Stay Updated</h2>
-                    <p className="text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">
-                        Subscribe to get the latest updates on AI, coding, and tech trends.
-                    </p>
+                    <div className="clay-card-inner">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-clay-800 depth-2">
+                            Stay Updated
+                        </h2>
+                        <p className="text-clay-600 mb-6 sm:mb-8 text-sm sm:text-base depth-1">
+                            Subscribe to get the latest updates on AI, coding, and tech trends.
+                        </p>
 
-                    <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-4 px-4" suppressHydrationWarning>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
-                            className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base"
-                            required
-                            suppressHydrationWarning
-                        />
-                        <button type="submit" className="btn-primary whitespace-nowrap" suppressHydrationWarning>
-                            Subscribe
-                        </button>
-                    </form>
+                        <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-4 px-4" suppressHydrationWarning>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                className="clay-input flex-1 px-3 sm:px-4 py-2 sm:py-3 text-clay-800 placeholder-clay-400 text-sm sm:text-base depth-2"
+                                required
+                                suppressHydrationWarning
+                            />
+                            <button
+                                type="submit"
+                                className="clay-btn px-4 sm:px-6 py-2 sm:py-3 whitespace-nowrap text-clay-800 hover:text-clay-900 font-semibold depth-3 hover:depth-4"
+                                suppressHydrationWarning
+                            >
+                                <span className="relative z-10">Subscribe</span>
+                            </button>
+                        </form>
 
-                    {status === 'success' && (
-                        <p className="text-green-500 mt-4">Successfully subscribed!</p>
-                    )}
-                    {status === 'error' && (
-                        <p className="text-red-500 mt-4">Something went wrong. Try again.</p>
-                    )}
+                        {status === 'success' && (
+                            <motion.p
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="text-green-600 mt-4 depth-1"
+                            >
+                                Successfully subscribed!
+                            </motion.p>
+                        )}
+                        {status === 'error' && (
+                            <motion.p
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="text-red-600 mt-4 depth-1"
+                            >
+                                Something went wrong. Try again.
+                            </motion.p>
+                        )}
+                    </div>
                 </motion.div>
             </div>
         </section>
