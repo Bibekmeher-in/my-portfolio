@@ -14,7 +14,7 @@ export function ThemeProvider({ children }) {
     }
 
     return (
-        <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem={false}>
             {children}
         </NextThemesProvider>
     )
