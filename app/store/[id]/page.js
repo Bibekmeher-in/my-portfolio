@@ -119,21 +119,45 @@ export default function ProductDetail() {
                     },
                 },
                 theme: {
-                    color: '#FF6B35',
+                    color: '#8B7355',
+                    backdrop_color: 'rgba(0, 0, 0, 0.8)',
                 },
                 modal: {
+                    backdropclose: false,
+                    escape: true,
+                    handleback: true,
+                    confirm_close: true,
                     ondismiss: function () {
                         setLoading(false)
-                    }
-                }
+                        // Remove body class when modal closes
+                        document.body.classList.remove('razorpay-open')
+                    },
+                    animation: true,
+                },
             }
 
             const razorpay = new window.Razorpay(options)
+
+            // Add body class when modal opens
+            razorpay.on('payment.submit', function () {
+                document.body.classList.add('razorpay-open')
+            })
+
             razorpay.open()
+
+            // Ensure modal is visible by adding body class
+            setTimeout(() => {
+                document.body.classList.add('razorpay-open')
+                // Force z-index on Razorpay elements
+                const razorpayContainer = document.querySelector('.razorpay-container')
+                const razorpayBackdrop = document.querySelector('.razorpay-backdrop')
+                if (razorpayContainer) razorpayContainer.style.zIndex = '99999'
+                if (razorpayBackdrop) razorpayBackdrop.style.zIndex = '99998'
+            }, 100)
+
         } catch (error) {
             console.error('Error initiating payment:', error)
             alert('Failed to initiate payment. Please try again.')
-        } finally {
             setLoading(false)
         }
     }

@@ -493,3 +493,38 @@ select:focus {
     border-color: var(--clay-text-secondary) !important;
     box-shadow: 0 0 0 2px var(--border-color) !important;
 }
+
+/* Razorpay Modal Fixes */
+.razorpay-container {
+    z-index: 99999 !important;
+}
+
+.razorpay-backdrop {
+    z-index: 99998 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.razorpay-checkout-frame {
+    z-index: 99999 !important;
+    position: fixed !important;
+}
+
+/* Ensure Razorpay modal is visible above all elements */
+iframe[name^="razorpay"] {
+    z-index: 99999 !important;
+}
+
+/* Fix for Razorpay overlay */
+body.razorpay-open {
+    overflow: hidden !important;
+}
+
+/* Razorpay payment modal styling */
+.razorpay-payment-button {
+    background: linear-gradient(145deg, #8B7355, #5A4233) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
