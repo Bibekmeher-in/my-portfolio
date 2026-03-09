@@ -213,100 +213,98 @@ export default function ProductDetail() {
             document.body.style.width = ''
             document.body.style.height = ''
         }
-        setLoading(false)
     }
-}
 
-if (!product) return (
-    <div className="pt-24 section-padding text-center">
-        <div className="text-2xl text-clay-text-muted">Loading...</div>
-    </div>
-)
+    if (!product) return (
+        <div className="pt-24 section-padding text-center">
+            <div className="text-2xl text-clay-text-muted">Loading...</div>
+        </div>
+    )
 
-return (
-    <div className="pt-24 section-padding">
-        <div className="container-custom max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-12">
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="clay-card rounded-3xl overflow-hidden depth-2"
-                >
-                    {product.image ? (
-                        <img
-                            src={product.image}
-                            alt={product.title}
-                            className="w-full h-96 object-cover"
-                        />
-                    ) : (
-                        <div className="h-96 bg-gradient-to-br from-clay-200 to-clay-300 dark:from-clay-700 dark:to-clay-800 rounded-3xl flex items-center justify-center">
-                            <HiShoppingCart className="text-9xl text-clay-text-muted opacity-30" />
-                        </div>
-                    )}
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                >
-                    <span className="px-4 py-2 clay-btn rounded-full text-sm capitalize inline-block">
-                        {product.category}
-                    </span>
-
-                    <h1 className="text-4xl font-bold mt-4 mb-4 text-clay-text">{product.title}</h1>
-                    <p className="text-clay-text-muted mb-6">{product.description}</p>
-
-                    <div className="text-4xl font-bold gradient-text-clay mb-6">
-                        {formatCurrency(product.price)}
-                    </div>
-
-                    {product.features && (
-                        <div className="mb-8">
-                            <h3 className="text-xl font-bold mb-4 text-clay-text">What's Included:</h3>
-                            <ul className="space-y-2">
-                                {product.features.map((feature, i) => (
-                                    <li key={i} className="flex items-center gap-2 text-clay-text-secondary">
-                                        <HiCheck className="text-green-600 dark:text-green-400 flex-shrink-0" size={20} />
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-
-                    <button
-                        onClick={handlePurchase}
-                        disabled={loading}
-                        className="clay-btn w-full py-4 text-lg font-bold depth-3 hover:depth-4 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+    return (
+        <div className="pt-24 section-padding">
+            <div className="container-custom max-w-6xl">
+                <div className="grid md:grid-cols-2 gap-12">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="clay-card rounded-3xl overflow-hidden depth-2"
                     >
-                        {loading ? 'Processing...' : 'Purchase Now'}
-                    </button>
+                        {product.image ? (
+                            <img
+                                src={product.image}
+                                alt={product.title}
+                                className="w-full h-96 object-cover"
+                            />
+                        ) : (
+                            <div className="h-96 bg-gradient-to-br from-clay-200 to-clay-300 dark:from-clay-700 dark:to-clay-800 rounded-3xl flex items-center justify-center">
+                                <HiShoppingCart className="text-9xl text-clay-text-muted opacity-30" />
+                            </div>
+                        )}
+                    </motion.div>
 
-                    <div className="mt-4 text-center">
-                        <p className="text-xs text-clay-text-muted mb-2">
-                            Secure payment powered by Razorpay
-                        </p>
-                        <div className="flex justify-center items-center gap-3 text-xs text-clay-text-muted">
-                            <span className="flex items-center gap-1">
-                                💳 Cards
-                            </span>
-                            <span>•</span>
-                            <span className="flex items-center gap-1">
-                                📱 UPI
-                            </span>
-                            <span>•</span>
-                            <span className="flex items-center gap-1">
-                                🏦 Net Banking
-                            </span>
-                            <span>•</span>
-                            <span className="flex items-center gap-1">
-                                👛 Wallets
-                            </span>
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                    >
+                        <span className="px-4 py-2 clay-btn rounded-full text-sm capitalize inline-block">
+                            {product.category}
+                        </span>
+
+                        <h1 className="text-4xl font-bold mt-4 mb-4 text-clay-text">{product.title}</h1>
+                        <p className="text-clay-text-muted mb-6">{product.description}</p>
+
+                        <div className="text-4xl font-bold gradient-text-clay mb-6">
+                            {formatCurrency(product.price)}
                         </div>
-                    </div>
-                </motion.div>
+
+                        {product.features && (
+                            <div className="mb-8">
+                                <h3 className="text-xl font-bold mb-4 text-clay-text">What's Included:</h3>
+                                <ul className="space-y-2">
+                                    {product.features.map((feature, i) => (
+                                        <li key={i} className="flex items-center gap-2 text-clay-text-secondary">
+                                            <HiCheck className="text-green-600 dark:text-green-400 flex-shrink-0" size={20} />
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        <button
+                            onClick={handlePurchase}
+                            disabled={loading}
+                            className="clay-btn w-full py-4 text-lg font-bold depth-3 hover:depth-4 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                        >
+                            {loading ? 'Processing...' : 'Purchase Now'}
+                        </button>
+
+                        <div className="mt-4 text-center">
+                            <p className="text-xs text-clay-text-muted mb-2">
+                                Secure payment powered by Razorpay
+                            </p>
+                            <div className="flex justify-center items-center gap-3 text-xs text-clay-text-muted">
+                                <span className="flex items-center gap-1">
+                                    💳 Cards
+                                </span>
+                                <span>•</span>
+                                <span className="flex items-center gap-1">
+                                    📱 UPI
+                                </span>
+                                <span>•</span>
+                                <span className="flex items-center gap-1">
+                                    🏦 Net Banking
+                                </span>
+                                <span>•</span>
+                                <span className="flex items-center gap-1">
+                                    👛 Wallets
+                                </span>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
 }
