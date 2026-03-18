@@ -2,8 +2,34 @@
 import Link from 'next/link'
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
+
+const socialLinks = [
+    { icon: FaGithub, href: 'https://github.com/Bibekmeher-in', label: 'GitHub' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/bibekananda-meher-0990812b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', label: 'LinkedIn' },
+    { icon: FaTwitter, href: 'https://x.com/Bibekanand59990', label: 'Twitter' },
+    { icon: FaInstagram, href: 'https://www.instagram.com/bibekmeher.in?igsh=MXZyYnVzdzBzMmVrZQ==', label: 'Instagram' },
+]
+
+const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Projects', href: '/projects' },
+]
+
+const resourceLinks = [
+    { name: 'Store', href: '/store' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' },
+]
 
 export default function Footer() {
+    const memoizedSocialLinks = useMemo(() => socialLinks, [])
+    const memoizedQuickLinks = useMemo(() => quickLinks, [])
+    const memoizedResourceLinks = useMemo(() => resourceLinks, [])
+    const currentYear = useMemo(() => new Date().getFullYear(), [])
+
     return (
         <footer className="clay-card border-t border-clay-300/20 mt-20 rounded-t-3xl">
             <div className="container-custom py-12">
@@ -29,18 +55,11 @@ export default function Footer() {
                     >
                         <h4 className="font-bold mb-4 text-clay-800">Quick Links</h4>
                         <div className="space-y-2">
-                            <Link href="/" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                Home
-                            </Link>
-                            <Link href="/about" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                About
-                            </Link>
-                            <Link href="/services" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                Services
-                            </Link>
-                            <Link href="/projects" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                Projects
-                            </Link>
+                            {memoizedQuickLinks.map((item) => (
+                                <Link key={item.name} href={item.href} className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
+                                    {item.name}
+                                </Link>
+                            ))}
                         </div>
                     </motion.div>
 
@@ -53,15 +72,11 @@ export default function Footer() {
                     >
                         <h4 className="font-bold mb-4 text-clay-800">Resources</h4>
                         <div className="space-y-2">
-                            <Link href="/store" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                Store
-                            </Link>
-                            <Link href="/blog" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                Blog
-                            </Link>
-                            <Link href="/contact" className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
-                                Contact
-                            </Link>
+                            {memoizedResourceLinks.map((item) => (
+                                <Link key={item.name} href={item.href} className="block clay-btn px-3 py-2 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-1 hover:depth-2">
+                                    {item.name}
+                                </Link>
+                            ))}
                         </div>
                     </motion.div>
 
@@ -74,38 +89,21 @@ export default function Footer() {
                     >
                         <h4 className="font-bold mb-4 text-clay-800">Connect</h4>
                         <div className="flex gap-4">
-                            <motion.a
-                                href="https://github.com/Bibekmeher-in"
-                                className="clay-btn p-3 text-clay-600 hover:text-clay-800 transition-colors depth-2 hover:depth-3"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <FaGithub size={20} />
-                            </motion.a>
-                            <motion.a
-                                href="https://www.linkedin.com/in/bibekananda-meher-0990812b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                                className="clay-btn p-3 text-clay-600 hover:text-clay-800 transition-colors depth-2 hover:depth-3"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <FaLinkedin size={20} />
-                            </motion.a>
-                            <motion.a
-                                href="https://x.com/Bibekanand59990"
-                                className="clay-btn p-3 text-clay-600 hover:text-clay-800 transition-colors depth-2 hover:depth-3"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <FaTwitter size={20} />
-                            </motion.a>
-                            <motion.a
-                                href="https://www.instagram.com/bibekmeher.in?igsh=MXZyYnVzdzBzMmVrZQ=="
-                                className="clay-btn p-3 text-clay-600 hover:text-clay-800 transition-colors depth-2 hover:depth-3"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <FaInstagram size={20} />
-                            </motion.a>
+                            {memoizedSocialLinks.map((social) => {
+                                const Icon = social.icon
+                                return (
+                                    <motion.a
+                                        key={social.label}
+                                        href={social.href}
+                                        aria-label={social.label}
+                                        className="clay-btn p-3 text-clay-600 hover:text-clay-800 transition-colors depth-2 hover:depth-3"
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        <Icon size={20} />
+                                    </motion.a>
+                                )
+                            })}
                         </div>
                     </motion.div>
                 </div>
@@ -116,7 +114,7 @@ export default function Footer() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                 >
-                    <p>&copy; {new Date().getFullYear()} Bibek Labs. All rights reserved.</p>
+                    <p>&copy; {currentYear} Bibek Labs. All rights reserved.</p>
                 </motion.div>
             </div>
         </footer>

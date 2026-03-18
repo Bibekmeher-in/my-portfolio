@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 
 const Claymorphism3D = dynamic(() => import('@/components/Claymorphism3D'), {
     ssr: false,
+    loading: () => null,
 })
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
@@ -21,16 +22,22 @@ export const metadata = {
         description: 'Building powerful websites, AI tools, and digital products.',
         type: 'website',
     },
+    viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
 }
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+                <meta name="theme-color" content="#E6D2BC" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+                <link rel="dns-prefetch" href="https://api.razorpay.com" />
             </head>
-            <body className={`${inter.className} perspective-3d`}>
+            <body className={`${inter.className} perspective-3d`} style={{ WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale' }}>
                 <ThemeProvider>
                     <Claymorphism3D />
                     <Navbar />

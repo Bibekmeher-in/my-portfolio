@@ -66,6 +66,8 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Claymorphism Card System */
@@ -79,8 +81,9 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transform-style: preserve-3d;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid var(--border-color);
+    will-change: transform;
 }
 
 .clay-card:hover {
@@ -105,10 +108,11 @@ body {
         inset 0 0 0 1px rgba(255, 255, 255, 0.2);
     color: var(--clay-text);
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
     position: relative;
     overflow: hidden;
+    will-change: transform;
 }
 
 .clay-btn::before {
@@ -121,6 +125,7 @@ body {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     border-radius: 16px;
     z-index: 1;
+    pointer-events: none;
 }
 
 .clay-btn:hover {
@@ -147,7 +152,7 @@ body {
         inset 4px 4px 8px var(--clay-shadow),
         inset -4px -4px 8px var(--clay-highlight);
     border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     color: var(--clay-text);
 }
 
@@ -175,6 +180,7 @@ body {
         0 10px 30px var(--clay-shadow),
         0 0 0 1px var(--border-color);
     border: none;
+    will-change: transform;
 }
 
 /* 3D Effects */
@@ -226,13 +232,13 @@ body {
 
 /* Smooth Transitions */
 .page-transition {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(10px);
     }
 
     to {
@@ -274,7 +280,7 @@ body {
 /* Link styles */
 a {
     color: var(--clay-text);
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 a:hover {
@@ -449,7 +455,7 @@ body {
     padding: 0.75rem 1.5rem;
     border-radius: 1rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow:
         8px 8px 16px var(--clay-shadow),
         -4px -4px 12px var(--clay-highlight);

@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState, useMemo } from 'react'
 
-// Seeded random number generator for consistent particle generation
 function seededRandom(seed) {
     const x = Math.sin(seed) * 10000
     return x - Math.floor(x)
@@ -17,10 +16,10 @@ export default function ParticleBackground() {
         setMounted(true)
     }, [])
 
-    // Generate particles with seeded randomness for consistency
+    // Reduced particle count from 80 to 30 for better performance
     const particles = useMemo(() => {
         const colors = ['#dc2626', '#991b1b', '#ef4444', '#7f1d1d']
-        return Array.from({ length: 80 }).map((_, i) => {
+        return Array.from({ length: 30 }).map((_, i) => {
             const seed1 = i * 0.1
             const seed2 = i * 0.2
             const seed3 = i * 0.3
@@ -29,7 +28,7 @@ export default function ParticleBackground() {
             return {
                 id: i,
                 color: colors[i % colors.length],
-                size: seededRandom(seed1) * 4 + 1,
+                size: seededRandom(seed1) * 3 + 0.5,
                 initialX: seededRandom(seed2),
                 initialY: seededRandom(seed3),
                 duration: seededRandom(seed4) * 15 + 10,
@@ -49,7 +48,8 @@ export default function ParticleBackground() {
                         width: particle.size,
                         height: particle.size,
                         backgroundColor: particle.color,
-                        boxShadow: `0 0 ${particle.size * 4}px ${particle.color}`,
+                        boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
+                        willChange: 'transform, opacity',
                     }}
                     initial={{
                         x: particle.initialX * dimensions.width,
@@ -67,7 +67,7 @@ export default function ParticleBackground() {
                             seededRandom(particle.id * 0.8) * dimensions.height,
                         ],
                         scale: [0, 1, 0],
-                        opacity: [0, 1, 0],
+                        opacity: [0, 0.8, 0],
                     }}
                     transition={{
                         duration: particle.duration,

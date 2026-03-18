@@ -34,12 +34,10 @@ export default function Hero() {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden perspective-3d">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* 3D Floating Elements */}
+                {/* Simplified 3D Floating Elements */}
                 <motion.div
                     animate={{
                         y: [0, -40, 0],
-                        rotateX: [0, 45, 0],
-                        rotateY: [0, 45, 0],
                     }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute top-20 left-4 sm:left-10 w-16 h-16 sm:w-32 sm:h-32 clay-card depth-3"
@@ -48,7 +46,6 @@ export default function Hero() {
                 <motion.div
                     animate={{
                         y: [0, 60, 0],
-                        rotateZ: [0, 180, 360],
                     }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute bottom-20 right-4 sm:right-10 w-20 h-20 sm:w-40 sm:h-40 clay-card rounded-full depth-4"
@@ -57,7 +54,6 @@ export default function Hero() {
                 <motion.div
                     animate={{
                         x: [0, 30, 0],
-                        rotateY: [0, 90, 180, 270, 360],
                     }}
                     transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
                     className="absolute top-1/2 left-1/4 w-12 h-12 sm:w-24 sm:h-24 clay-card depth-2"
@@ -74,14 +70,9 @@ export default function Hero() {
                 >
                     <motion.h1
                         className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 text-clay-800 leading-tight"
-                        animate={{
-                            textShadow: [
-                                '2px 2px 4px rgba(90, 66, 51, 0.2)',
-                                '4px 4px 8px rgba(90, 66, 51, 0.3)',
-                                '2px 2px 4px rgba(90, 66, 51, 0.2)',
-                            ]
-                        }}
-                        transition={{ duration: 3, repeat: Infinity }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8 }}
                     >
                         Hi, I'm <span className="gradient-text-clay depth-3 inline-block">Bibek</span>
                     </motion.h1>
@@ -123,13 +114,12 @@ export default function Hero() {
                 </motion.div>
             </div>
 
-            {/* Interactive 3D Background Elements */}
+            {/* Simplified Interactive 3D Background Elements */}
             <div className="absolute inset-0 pointer-events-none">
                 <motion.div
                     className="absolute top-1/3 left-1/6 w-8 h-8 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-clay-200/30 to-clay-300/20 backdrop-blur-sm border border-white/10"
                     animate={{
                         y: [0, -20, 0],
-                        x: [0, 15, 0],
                     }}
                     transition={{
                         duration: 7,
@@ -141,12 +131,11 @@ export default function Hero() {
                     className="absolute bottom-1/3 right-1/6 w-12 h-12 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-tr from-clay-300/25 to-clay-400/15 backdrop-blur-sm border border-white/10"
                     animate={{
                         y: [0, 25, 0],
-                        rotate: [0, 90, 180, 270, 360],
                     }}
                     transition={{
                         duration: 9,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "easeInOut"
                     }}
                 />
             </div>

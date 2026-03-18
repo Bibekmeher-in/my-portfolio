@@ -1,37 +1,52 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { HiMenu, HiX, HiUser } from 'react-icons/hi'
 import ThemeToggle from './ThemeToggle'
 
+const menuItems = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Services', href: '/services' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Store', href: '/store' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' },
+]
+
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [user, setUser] = useState(null)
+    const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
+        setMounted(true)
         const userData = localStorage.getItem('user')
         if (userData) {
-            setUser(JSON.parse(userData))
+            try {
+                setUser(JSON.parse(userData))
+            } catch (e) {
+                console.error('Failed to parse user data')
+            }
         }
     }, [])
 
-    const handleLogout = () => {
+    const handleLogout = useCallback(() => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         setUser(null)
+        setIsOpen(false)
         window.location.href = '/'
-    }
+    }, [])
 
-    const menuItems = [
-        { name: 'Home', href: '/' },
-        { name: 'About', href: '/about' },
-        { name: 'Services', href: '/services' },
-        { name: 'Projects', href: '/projects' },
-        { name: 'Store', href: '/store' },
-        { name: 'Blog', href: '/blog' },
-        { name: 'Contact', href: '/contact' },
-    ]
+    const handleMenuClose = useCallback(() => {
+        setIsOpen(false)
+    }, [])
+
+    const memoizedMenuItems = useMemo(() => menuItems, [])
+
+    if (!mounted) return null
 
     return (
         <motion.nav
@@ -49,12 +64,12 @@ export default function Navbar() {
                     </Link>
 
                     <div className="hidden md:flex items-center space-x-6">
-                        {menuItems.map((item, index) => (
+                        {memoizedMenuItems.map((item, index) => (
                             <motion.div
                                 key={item.name}
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
+                                transition={{ delay: index * 0.05 }}
                                 className="relative"
                             >
                                 <Link
@@ -62,12 +77,6 @@ export default function Navbar() {
                                     className="clay-btn px-4 py-2 text-clay-600 hover:text-clay-800 transition-all duration-300 relative group depth-2"
                                 >
                                     <span className="relative z-10">{item.name}</span>
-                                    <motion.span
-                                        className="absolute inset-0 bg-gradient-to-r from-clay-200/20 to-clay-300/20 rounded-2xl"
-                                        initial={{ scale: 0 }}
-                                        whileHover={{ scale: 1 }}
-                                        transition={{ duration: 0.3 }}
-                                    />
                                 </Link>
                             </motion.div>
                         ))}
@@ -121,12 +130,12 @@ export default function Navbar() {
                         className="md:hidden clay-card mt-2 overflow-hidden"
                     >
                         <div className="p-4 space-y-2">
-                            {menuItems.map((item) => (
+                            {memoizedMenuItems.map((item) => (
                                 <Link
                                     key={item.name}
                                     href={item.href}
                                     className="block clay-btn py-3 px-4 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-2"
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={handleMenuClose}
                                 >
                                     {item.name}
                                 </Link>
@@ -137,15 +146,12 @@ export default function Navbar() {
                                     <Link
                                         href={user.role === 'admin' ? '/admin' : '/profile'}
                                         className="block clay-btn py-3 px-4 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-2"
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={handleMenuClose}
                                     >
                                         Profile ({user.name})
                                     </Link>
                                     <button
-                                        onClick={() => {
-                                            handleLogout()
-                                            setIsOpen(false)
-                                        }}
+                                        onClick={handleLogout}
                                         className="block w-full text-left clay-btn py-3 px-4 text-clay-600 hover:text-clay-800 transition-all rounded-2xl depth-2"
                                     >
                                         Logout
